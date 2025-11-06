@@ -1,0 +1,6 @@
+Make a website for FRC with 
+team name
+team logo
+resembles team 1325
+separate landing page
+dropdown menu for tabs
