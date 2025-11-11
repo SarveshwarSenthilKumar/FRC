@@ -3,25 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team 11348 | Innovation & Excellence</title>
+    <title>Team 11348 | Future Innovation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         /* Base styles */
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #7c3aed;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --transition: all 0.3s ease;
+            --primary: #00f5ff;
+            --primary-dark: #00a8cc;
+            --secondary: #9d4edd;
+            --accent: #ff006e;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --light: #e2f1ff;
+            --gray: #8a8fa3;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --glow: 0 0 10px rgba(0, 245, 255, 0.7), 0 0 20px rgba(0, 245, 255, 0.5), 0 0 30px rgba(0, 245, 255, 0.3);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Orbitron', 'Inter', sans-serif;
         }
         
         html {
@@ -29,10 +34,12 @@
         }
         
         body {
-            background-color: var(--light);
-            color: var(--dark);
+            background-color: var(--dark);
+            color: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
+            background: radial-gradient(ellipse at bottom, #0a0a0f 0%, #050508 100%);
+            min-height: 100vh;
         }
         
         h1, h2, h3, h4 {
@@ -48,61 +55,100 @@
         
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
         }
         
         .btn {
             display: inline-block;
-            padding: 0.8rem 1.8rem;
-            background: var(--primary);
-            color: white;
+            padding: 0.9rem 2.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
             border-radius: 4px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
             border: none;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--glow);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.4);
         }
         
         .btn-secondary {
             background: transparent;
             border: 2px solid var(--primary);
             color: var(--primary);
+            box-shadow: none;
         }
         
         .btn-secondary:hover {
             background: var(--primary);
-            color: white;
+            color: var(--dark);
         }
         
         section {
-            padding: 6rem 0;
+            padding: 8rem 0;
+            position: relative;
         }
         
         .section-header {
             text-align: center;
-            max-width: 700px;
-            margin: 0 auto 4rem;
+            max-width: 800px;
+            margin: 0 auto 5rem;
         }
         
         .section-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
         }
         
         .section-header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            line-height: 1.8;
         }
         
         /* Navigation */
@@ -112,9 +158,9 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 245, 255, 0.1);
             transition: var(--transition);
         }
         
@@ -126,12 +172,13 @@
         }
         
         .logo {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
             color: var(--primary);
             text-decoration: none;
             display: flex;
             align-items: center;
+            text-shadow: var(--glow);
         }
         
         .logo span {
@@ -145,14 +192,16 @@
         
         .nav-links li {
             margin-left: 2.5rem;
+            position: relative;
         }
         
         .nav-links a {
             text-decoration: none;
-            color: var(--dark);
+            color: var(--light);
             font-weight: 500;
             transition: var(--transition);
             position: relative;
+            padding: 0.5rem 0;
         }
         
         .nav-links a:hover {
@@ -162,12 +211,13 @@
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
             background: var(--primary);
             transition: var(--transition);
+            box-shadow: 0 0 8px var(--primary);
         }
         
         .nav-links a:hover::after {
@@ -178,202 +228,268 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--primary);
         }
         
         /* Hero Section */
         .hero {
-            padding: 12rem 0 8rem;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 15rem 0 10rem;
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
         
-        .hero::before {
-            content: '';
+        #particles-js {
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
+            width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="%232563eb" opacity="0.03"/></svg>');
-            background-size: cover;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
         
         .hero-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            position: relative;
+            z-index: 2;
         }
         
         .hero-text {
             flex: 1;
-            max-width: 600px;
+            max-width: 650px;
         }
         
         .hero-text h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin-bottom: 1.5rem;
             line-height: 1.1;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(157, 78, 221, 0.4);
         }
         
         .hero-text p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 2.5rem;
             color: var(--gray);
+            line-height: 1.8;
         }
         
         .hero-btns {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
         }
         
         .hero-image {
             flex: 1;
-            text-align: right;
+            text-align: center;
+            position: relative;
         }
         
-        .hero-image img {
-            max-width: 100%;
+        #three-container {
+            width: 100%;
+            height: 500px;
             border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            box-shadow: var(--glow);
+            position: relative;
         }
         
         /* Features Section */
         .features {
-            background: white;
+            background: rgba(5, 5, 8, 0.7);
+            position: relative;
         }
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
         }
         
         .feature-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            background: rgba(20, 20, 30, 0.6);
+            padding: 3rem 2.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 245, 255, 0.1);
             transition: var(--transition);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
         
         .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), var(--glow);
+            border-color: rgba(0, 245, 255, 0.3);
         }
         
         .feature-icon {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            color: white;
-            font-size: 1.8rem;
+            color: var(--dark);
+            font-size: 2rem;
+            box-shadow: var(--glow);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: rotateY(180deg) scale(1.1);
         }
         
         .feature-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             margin-bottom: 1rem;
+            color: var(--light);
         }
         
         /* Team Section */
         .team {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            position: relative;
         }
         
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
         }
         
         .team-member {
-            background: white;
-            border-radius: 10px;
+            background: rgba(20, 20, 30, 0.6);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             transition: var(--transition);
+            border: 1px solid rgba(0, 245, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
         
         .team-member:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 245, 255, 0.2);
+            border-color: rgba(0, 245, 255, 0.3);
         }
         
         .member-img {
-            height: 250px;
+            height: 300px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 4rem;
+            color: var(--dark);
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .member-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+        
+        .team-member:hover .member-img::before {
+            transform: translateX(100%);
         }
         
         .member-info {
-            padding: 1.5rem;
+            padding: 2rem;
         }
         
         .member-info h3 {
             margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            color: var(--primary);
         }
         
         .member-info p {
-            color: var(--primary);
+            color: var(--secondary);
             font-weight: 500;
             margin-bottom: 1rem;
         }
         
         /* CTA Section */
         .cta {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(157, 78, 221, 0.1));
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="%2300f5ff" opacity="0.03"/></svg>');
+            background-size: cover;
         }
         
         .cta h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .cta p {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--gray);
             max-width: 700px;
             margin: 0 auto 2.5rem;
-        }
-        
-        .cta .btn {
-            background: white;
-            color: var(--primary);
-        }
-        
-        .cta .btn:hover {
-            background: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
         }
         
         /* Footer */
         footer {
-            background: var(--dark);
-            color: white;
-            padding: 5rem 0 2rem;
+            background: var(--darker);
+            color: var(--light);
+            padding: 6rem 0 2rem;
+            position: relative;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 3rem;
             margin-bottom: 3rem;
         }
         
         .footer-column h3 {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             margin-bottom: 1.5rem;
             position: relative;
+            color: var(--primary);
         }
         
         .footer-column h3::after {
@@ -384,6 +500,7 @@
             width: 40px;
             height: 3px;
             background: var(--primary);
+            box-shadow: 0 0 8px var(--primary);
         }
         
         .footer-links {
@@ -395,14 +512,15 @@
         }
         
         .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--gray);
             text-decoration: none;
             transition: var(--transition);
+            display: inline-block;
         }
         
         .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
+            color: var(--primary);
+            transform: translateX(5px);
         }
         
         .social-links {
@@ -415,45 +533,85 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 245, 255, 0.1);
             border-radius: 50%;
-            color: white;
+            color: var(--primary);
             transition: var(--transition);
+            border: 1px solid rgba(0, 245, 255, 0.2);
         }
         
         .social-links a:hover {
             background: var(--primary);
-            transform: translateY(-3px);
+            color: var(--dark);
+            transform: translateY(-5px);
+            box-shadow: var(--glow);
         }
         
         .footer-bottom {
             text-align: center;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid rgba(0, 245, 255, 0.1);
+            color: var(--gray);
             font-size: 0.9rem;
         }
         
+        /* 3D Cube Animation */
+        .cube-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            perspective: 800px;
+        }
+        
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 15s infinite linear;
+        }
+        
+        .cube-face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            box-shadow: inset 0 0 20px rgba(0, 245, 255, 0.2);
+        }
+        
+        .cube-face.front { transform: translateZ(100px); }
+        .cube-face.back { transform: translateZ(-100px) rotateY(180deg); }
+        .cube-face.right { transform: translateX(100px) rotateY(90deg); }
+        .cube-face.left { transform: translateX(-100px) rotateY(-90deg); }
+        .cube-face.top { transform: translateY(-100px) rotateX(90deg); }
+        .cube-face.bottom { transform: translateY(100px) rotateX(-90deg); }
+        
+        @keyframes rotate {
+            0% { transform: rotateX(0) rotateY(0) rotateZ(0); }
+            100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+        }
+        
         /* Responsive Styles */
-        @media (max-width: 992px) {
+        @media (max-width: 1200px) {
             .hero-content {
                 flex-direction: column;
                 text-align: center;
             }
             
             .hero-text {
-                margin-bottom: 3rem;
+                margin-bottom: 4rem;
             }
             
             .hero-btns {
                 justify-content: center;
-            }
-            
-            .hero::before {
-                width: 100%;
-                opacity: 0.1;
             }
         }
         
@@ -468,10 +626,12 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: white;
+                background: rgba(10, 10, 15, 0.95);
                 flex-direction: column;
-                padding: 1.5rem;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                padding: 2rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                border-top: 1px solid rgba(0, 245, 255, 0.1);
+                backdrop-filter: blur(15px);
             }
             
             .nav-links.active {
@@ -479,7 +639,7 @@
             }
             
             .nav-links li {
-                margin: 0.8rem 0;
+                margin: 1rem 0;
             }
             
             .mobile-menu {
@@ -487,17 +647,21 @@
             }
             
             .hero-text h1 {
-                font-size: 2.8rem;
+                font-size: 3rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.5rem;
             }
             
             section {
-                padding: 4rem 0;
+                padding: 5rem 0;
             }
         }
         
         @media (max-width: 576px) {
             .hero-text h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .section-header h2 {
@@ -507,12 +671,30 @@
             .hero-btns {
                 flex-direction: column;
                 align-items: center;
+                gap: 1rem;
             }
             
             .btn {
                 width: 100%;
                 text-align: center;
             }
+            
+            .cube-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .cube-face {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .cube-face.front { transform: translateZ(75px); }
+            .cube-face.back { transform: translateZ(-75px) rotateY(180deg); }
+            .cube-face.right { transform: translateX(75px) rotateY(90deg); }
+            .cube-face.left { transform: translateX(-75px) rotateY(-90deg); }
+            .cube-face.top { transform: translateY(-75px) rotateX(90deg); }
+            .cube-face.bottom { transform: translateY(75px) rotateX(-90deg); }
         }
     </style>
 </head>
@@ -521,7 +703,7 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">Team<span>11348</span></a>
+                <a href="#" class="logo">TEAM<span>11348</span></a>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -538,21 +720,19 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div id="particles-js"></div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Innovating the Future with Precision and Excellence</h1>
-                    <p>Team 11348 is at the forefront of technological innovation, delivering cutting-edge solutions that transform industries and drive progress.</p>
+                    <h1>SHAPING THE FUTURE WITH INNOVATION</h1>
+                    <p>Team 11348 is pioneering next-generation technology solutions that push the boundaries of what's possible. We transform complex challenges into elegant solutions.</p>
                     <div class="hero-btns">
-                        <a href="#contact" class="btn">Get Started</a>
-                        <a href="#about" class="btn btn-secondary">Learn More</a>
+                        <a href="#contact" class="btn">Join The Revolution</a>
+                        <a href="#about" class="btn btn-secondary">Explore Our Work</a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <!-- Placeholder for hero image -->
-                    <div style="width: 100%; height: 400px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
-                        Innovative Technology Visual
-                    </div>
+                    <div id="three-container"></div>
                 </div>
             </div>
         </div>
@@ -562,30 +742,48 @@
     <section class="features" id="about">
         <div class="container">
             <div class="section-header">
-                <h2>Why Choose Team 11348</h2>
-                <p>We combine expertise, innovation, and dedication to deliver exceptional results for our clients.</p>
+                <h2>OUR CORE CAPABILITIES</h2>
+                <p>We combine cutting-edge technology with visionary thinking to deliver solutions that redefine industries.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-rocket"></i>
+                        <i class="fas fa-robot"></i>
                     </div>
-                    <h3>Cutting-Edge Innovation</h3>
-                    <p>We stay ahead of industry trends to deliver forward-thinking solutions that give you a competitive edge.</p>
+                    <h3>AI & Machine Learning</h3>
+                    <p>Advanced algorithms that learn, adapt, and optimize processes in real-time for unprecedented efficiency.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-cube"></i>
                     </div>
-                    <h3>Expert Team</h3>
-                    <p>Our diverse team of specialists brings decades of combined experience to every project we undertake.</p>
+                    <h3>3D Innovation</h3>
+                    <p>Immersive 3D modeling and visualization that brings ideas to life with stunning realism and interactivity.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-bolt"></i>
                     </div>
-                    <h3>Proven Results</h3>
-                    <p>We measure our success by the tangible results and ROI we deliver to our clients and partners.</p>
+                    <h3>Quantum Computing</h3>
+                    <p>Harnessing quantum mechanics to solve complex problems millions of times faster than classical computers.</p>
+                </div>
+            </div>
+            
+            <!-- 3D Cube Animation -->
+            <div style="margin-top: 6rem;">
+                <div class="section-header">
+                    <h2>EXPLORE OUR DIMENSIONS</h2>
+                    <p>Experience our multi-faceted approach to innovation through interactive 3D elements.</p>
+                </div>
+                <div class="cube-container">
+                    <div class="cube">
+                        <div class="cube-face front"><i class="fas fa-code"></i></div>
+                        <div class="cube-face back"><i class="fas fa-cogs"></i></div>
+                        <div class="cube-face right"><i class="fas fa-brain"></i></div>
+                        <div class="cube-face left"><i class="fas fa-rocket"></i></div>
+                        <div class="cube-face top"><i class="fas fa-atom"></i></div>
+                        <div class="cube-face bottom"><i class="fas fa-infinity"></i></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -595,48 +793,48 @@
     <section class="team" id="team">
         <div class="container">
             <div class="section-header">
-                <h2>Meet Our Leadership</h2>
-                <p>The visionary minds driving innovation and excellence at Team 11348.</p>
+                <h2>MEET THE VISIONARIES</h2>
+                <p>The brilliant minds driving innovation and pushing the boundaries of technology at Team 11348.</p>
             </div>
             <div class="team-grid">
                 <div class="team-member">
                     <div class="member-img">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-user-astronaut"></i>
                     </div>
                     <div class="member-info">
-                        <h3>Alex Johnson</h3>
-                        <p>CEO & Founder</p>
-                        <p>Visionary leader with 15+ years in tech innovation and business strategy.</p>
+                        <h3>DR. ALEX RIVERA</h3>
+                        <p>Chief Innovation Officer</p>
+                        <p>Quantum computing specialist with 20+ patents in advanced computational systems.</p>
                     </div>
                 </div>
                 <div class="team-member">
                     <div class="member-img">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-user-ninja"></i>
                     </div>
                     <div class="member-info">
-                        <h3>Sarah Chen</h3>
-                        <p>CTO</p>
-                        <p>Technical expert specializing in AI, machine learning, and scalable systems.</p>
+                        <h3>KAITLYN ZHANG</h3>
+                        <p>Head of AI Research</p>
+                        <p>Neural network architect pioneering ethical AI systems with human-like reasoning.</p>
                     </div>
                 </div>
                 <div class="team-member">
                     <div class="member-img">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-user-secret"></i>
                     </div>
                     <div class="member-info">
-                        <h3>Michael Rodriguez</h3>
-                        <p>Head of Operations</p>
-                        <p>Operations specialist focused on efficiency, process optimization, and growth.</p>
+                        <h3>MARCUS THORNE</h3>
+                        <p>Cybernetics Director</p>
+                        <p>Human-machine interface expert bridging biological and digital intelligence.</p>
                     </div>
                 </div>
                 <div class="team-member">
                     <div class="member-img">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-user-tie"></i>
                     </div>
                     <div class="member-info">
-                        <h3>Emily Watson</h3>
-                        <p>Director of Innovation</p>
-                        <p>Creative thinker driving R&D and pioneering new technological approaches.</p>
+                        <h3>DR. ISABELLA MOREAU</h3>
+                        <p>Quantum Architect</p>
+                        <p>Theoretical physicist developing next-generation quantum processing units.</p>
                     </div>
                 </div>
             </div>
@@ -646,9 +844,9 @@
     <!-- CTA Section -->
     <section class="cta" id="contact">
         <div class="container">
-            <h2>Ready to Transform Your Business?</h2>
-            <p>Join the growing list of industry leaders who trust Team 11348 to deliver innovative solutions and drive measurable results.</p>
-            <a href="#contact" class="btn">Start Your Project Today</a>
+            <h2>READY TO TRANSFORM REALITY?</h2>
+            <p>Join forces with Team 11348 and become part of the technological revolution that's shaping our future.</p>
+            <a href="#contact" class="btn">Initiate Connection</a>
         </div>
     </section>
 
@@ -657,17 +855,17 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Team 11348</h3>
-                    <p>Driving innovation and excellence through cutting-edge technology solutions.</p>
+                    <h3>TEAM 11348</h3>
+                    <p>Pioneering the future through cutting-edge innovation and revolutionary technology solutions.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-linkedin"></i></a>
                         <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3>Quick Links</h3>
+                    <h3>NAVIGATION</h3>
                     <ul class="footer-links">
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About Us</a></li>
@@ -677,26 +875,26 @@
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Services</h3>
+                    <h3>SERVICES</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Technology Consulting</a></li>
-                        <li><a href="#">Software Development</a></li>
+                        <li><a href="#">Quantum Computing</a></li>
                         <li><a href="#">AI Solutions</a></li>
-                        <li><a href="#">Digital Transformation</a></li>
-                        <li><a href="#">Innovation Workshops</a></li>
+                        <li><a href="#">3D Innovation</a></li>
+                        <li><a href="#">Cybernetics</a></li>
+                        <li><a href="#">Future Tech</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Contact Us</h3>
+                    <h3>CONTACT</h3>
                     <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Innovation Drive, Tech City</li>
-                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-envelope"></i> info@team11348.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 11348 Innovation Drive, Tech City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 141-8141</li>
+                        <li><i class="fas fa-envelope"></i> contact@team11348.com</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 Team 11348. All rights reserved.</p>
+                <p>&copy; 2023 TEAM 11348. All rights reserved. | Shaping Tomorrow, Today</p>
             </div>
         </div>
     </footer>
@@ -719,12 +917,101 @@
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
                 header.style.padding = '0.5rem 0';
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                header.style.background = 'rgba(10, 10, 15, 0.95)';
             } else {
                 header.style.padding = '1.5rem 0';
-                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+                header.style.background = 'rgba(10, 10, 15, 0.8)';
             }
         });
+
+        // Initialize particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#00f5ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00a8cc",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                }
+            }
+        });
+
+        // Three.js 3D scene
+        function initThreeJS() {
+            const container = document.getElementById('three-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(renderer.domElement);
+            
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0x00a8cc, 0.5);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0x9d4edd, 0.8);
+            directionalLight.position.set(5, 5, 5);
+            scene.add(directionalLight);
+            
+            // Create a complex geometry
+            const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+            const material = new THREE.MeshPhongMaterial({ 
+                color: 0x00f5ff,
+                shininess: 100,
+                transparent: true,
+                opacity: 0.9
+            });
+            const torusKnot = new THREE.Mesh(geometry, material);
+            scene.add(torusKnot);
+            
+            camera.position.z = 30;
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                torusKnot.rotation.x += 0.01;
+                torusKnot.rotation.y += 0.01;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        }
+        
+        // Initialize Three.js when the page loads
+        window.addEventListener('load', initThreeJS);
     </script>
 </body>
 </html>
