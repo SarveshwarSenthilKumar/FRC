@@ -1,0 +1,14 @@
+# Custom error documents
+ErrorDocument 400 /wip.html
+ErrorDocument 401 /wip.html
+ErrorDocument 403 /wip.html
+ErrorDocument 404 /wip.html
+ErrorDocument 500 /wip.html
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Redirect all errors to wip.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /wip.html [L,R=302]
