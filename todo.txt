@@ -10,4 +10,3 @@ remove view all mentors buttons
 change team members in team.html
 
 update footers for every page
-update email for 404 page
