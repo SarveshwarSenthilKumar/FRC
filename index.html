@@ -655,6 +655,268 @@
                 text-align: center;
             }
         }
+
+        /* Modern Footer Styles */
+        .modern-footer {
+            background: var(--darker);
+            color: var(--light);
+            padding-top: 5rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: 5rem;
+        }
+
+        .footer-waves {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .footer-waves svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            padding: 4rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-brand {
+            max-width: 400px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo-img {
+            width: 50px;
+            height: 50px;
+            margin-right: 1rem;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo-text .highlight {
+            color: var(--secondary);
+            -webkit-text-fill-color: var(--secondary);
+            background: none;
+        }
+
+        .footer-description {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-links-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-heading {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-nav {
+            list-style: none;
+        }
+
+        .footer-nav li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-nav a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-nav a i {
+            font-size: 0.7rem;
+            color: var(--secondary);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateX(-5px);
+        }
+
+        .footer-nav a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-nav a:hover i {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-item {
+            display: flex;
+            margin-bottom: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            color: var(--secondary);
+            margin-right: 1rem;
+            font-size: 1.1rem;
+            margin-top: 0.25rem;
+            min-width: 20px;
+        }
+
+        .contact-item a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-item a:hover {
+            color: var(--secondary);
+        }
+
+        .contact-sub {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-legal p {
+            margin: 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .first-disclaimer {
+            font-size: 0.8rem !important;
+            opacity: 0.7;
+            margin-top: 0.5rem !important;
+        }
+
+        .footer-credits {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .footer-credits i {
+            color: #e53e3e;
+            margin: 0 0.25rem;
+        }
+
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-brand {
+                max-width: 100%;
+            }
+
+            .footer-links-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-links-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .footer-legal {
+                order: 2;
+            }
+
+            .footer-credits {
+                order: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -820,48 +1082,94 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="modern-footer">
+        <div class="footer-waves">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+                <path fill="var(--primary)" fill-opacity="1" d="M0,64L48,69.3C96,75,192,85,288,90.7C384,96,480,96,576,85.3C672,75,768,53,864,48C960,43,1056,53,1152,64C1248,75,1344,85,1392,90.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+            </svg>
+        </div>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
-                    <h3>TEAM 11348</h3>
-                    <p>FRC Team 11348: Building the next generation of innovators through competitive robotics.</p>
-                        <a href="https://www.instagram.com/frc11348"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="icon.png" alt="Team 11348 Logo" class="footer-logo-img">
+                        <span class="logo-text">TEAM <span class="highlight">11348</span></span>
+                    </div>
+                    <p class="footer-description">Empowering the next generation of innovators through competitive robotics and STEM education.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/frc11348" class="social-link" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/Team-11348" class="social-link" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <!--
+                        <a href="https://www.youtube.com/" class="social-link" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        
+                        <a href="https://twitter.com/" class="social-link" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        -->
                     </div>
                 </div>
-                <div class="footer-column">
-                    <h3>NAVIGATION</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="team.html">Our Team</a></li>
-                        <li><a href="about.html#robots">Our Robots</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>RESOURCES</h3>
-                    <ul class="footer-links">
-                        <li><a href="https://www.firstinspires.org/robotics/frc" target="_blank">FIRST Robotics</a></li>
-                        <li><a href="https://www.firstinspires.org/robotics/frc/calendar" target="_blank">Competition Schedule</a></li>
-                        <li><a href="about.html#history">Team History</a></li>
-                        <li><a href="contact.html#sponsors">Sponsor Information</a></li>
-                        <li><a href="about.html#gallery">Media Gallery</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>CONTACT</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> 70 Mineola Rd E, Mississauga, ON</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Port Credit Secondary School</li>
-                        <li><i class="fas fa-phone"></i> +1 (905) 278-3382</li>
-                        <li><i class="fas fa-envelope"></i> beaconbots@team11348.com</li>
-                    </ul>
+
+                <div class="footer-links-grid">
+                    <div class="footer-column">
+                        <h3 class="footer-heading">Quick Links</h3>
+                        <ul class="footer-nav">
+                            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                            <li><a href="team.html"><i class="fas fa-chevron-right"></i> Our Team</a></li>
+                            <li><a href="about.html#robots"><i class="fas fa-chevron-right"></i> Our Robots</a></li>
+                            <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3 class="footer-heading">Resources</h3>
+                        <ul class="footer-nav">
+                            <li><a href="https://www.firstinspires.org/robotics/frc" target="_blank"><i class="fas fa-external-link-alt"></i> FIRST Robotics</a></li>
+                            <li><a href="https://www.firstinspires.org/robotics/frc/calendar" target="_blank"><i class="fas fa-calendar-alt"></i> Competition Schedule</a></li>
+                            <li><a href="about.html#history"><i class="fas fa-history"></i> Team History</a></li>
+                            <li><a href="contact.html#sponsors"><i class="fas fa-hand-holding-heart"></i> Sponsor Us</a></li>
+                            <li><a href="about.html#gallery"><i class="fas fa-images"></i> Media Gallery</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3 class="footer-heading">Contact Us</h3>
+                        <ul class="contact-info">
+                            <li class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <div>
+                                    <p>70 Mineola Rd E, Mississauga, ON</p>
+                                    <p class="contact-sub">Port Credit Secondary School</p>
+                                </div>
+                            </li>
+                            <li class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <a href="tel:+19052783382">+1 (905) 278-3382</a>
+                            </li>
+                            <li class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:beaconbots@team11348.com">beaconbots@team11348.com</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
                 </div>
             </div>
+
             <div class="footer-bottom">
-                <p>&copy; 2023 FRC TEAM 11348. All rights reserved. | Part of the FIRST Robotics Competition</p>
+                <div class="footer-legal">
+                    <p>&copy; 2025 FRC Team 11348 - BeaconBots. All rights reserved.</p>
+                    <p class="first-disclaimer">FIRST&reg; and other associated marks and logos are owned by FIRST (For Inspiration and Recognition of Science and Technology), a 501(c)(3) organization.</p>
+                </div>
+                <div class="footer-credits">
+                    <p>Made with <i class="fas fa-heart"></i> by Team 11348</p>
+                </div>
             </div>
         </div>
     </footer>
