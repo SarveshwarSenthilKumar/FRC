@@ -6,6 +6,4 @@ connect error page
 create a previous robots page
 create a view sponsors and become page
 
-remove view all mentors buttons
-
 remove forms or make them work
