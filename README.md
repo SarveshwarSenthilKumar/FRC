@@ -138,7 +138,7 @@ To run this website locally:
 
 ## 📝 Contributing
 
-This website was developed by **Sarveshwar Senthil Kumar** as part of the team's web presence. For contributions or suggestions:
+For contributions or suggestions:
 
 1. Fork the repository
 2. Create a feature branch
