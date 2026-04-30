@@ -1,6 +1,7 @@
 # FRC Team 11348 - BeaconBots Website
 
 **Official website for FRC Team 11348 - BeaconBots, a FIRST Robotics Competition team dedicated to inspiring the next generation of innovators through competitive robotics and STEM education.**
+Moved to new location
 
 ![Team 11348 Logo](icon.png)
 
